@@ -2,8 +2,10 @@ import cv2
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import sklearn
+from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Lambda, Cropping2D, Convolution2D, MaxPooling2D, Flatten, Dense, Dropout,Activation
+from keras.layers import Lambda, Cropping2D, Convolution2D, MaxPooling2D, Flatten, Dense, Dropout, Activation
 
 
 images_path = 'Udacity_Data/data/'
@@ -12,19 +14,23 @@ driving_data_path = 'Udacity_Data/data/driving_log.csv'
 
 def GetDataFromExcel(DrivingDataPath):
     lines=[]
+    print("Reading Data from Excel....")
     with open (DrivingDataPath) as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
             lines.append(line)
-    del lines[0]        
+    del lines[0]
+    print("Done")
+    print()    
     return lines            
 
 def GetImagesAndSteeringData(StoredLines,ImagesPath):
     images = []
     steering = []
     correction = 0.2
+    print("Getting Camera Data....")
     for line in StoredLines:
-		  #####################Center Camera Data#######################
+          #####################Center Camera Data#######################
         center_image_name = line[0]
         center_image_path = ImagesPath + center_image_name
         center_image = cv2.imread(center_image_path)
@@ -40,46 +46,66 @@ def GetImagesAndSteeringData(StoredLines,ImagesPath):
         images.append(left_image)
         steering.append(left_steering_value)
         
-        #####################right Camera Data#######################
+        #####################Right Camera Data#######################
         right_image_name = line[2].strip()
         right_image_path = ImagesPath + right_image_name
         right_image = cv2.imread(right_image_path)
         right_steering_value = center_steering_value - correction
         images.append(right_image)
         steering.append(right_steering_value)
-
-    return images,steering
-
-def AugmentData(TotalImages, SteeringData):
-    images_augmented = []
-    steering_data_augmented = []
-    for image,steering in zip(TotalImages, SteeringData):
         
-        images_augmented.append(image)
-        images_augmented.append(cv2.flip(image,1))
-        
-        steering_data_augmented.append(steering)
-        steering_data_augmented.append(steering*-1.0)
-        
-    return images_augmented, steering_data_augmented    
+    print ("Camera Data Captured")
+    print()
+    return images,steering   
     
+def generator(samples, batch_size=32):
+    """
+    Generate the required images and measurments for training/
+    `samples` is a list of pairs (`imagePath`, `measurement`).
+    """
+    num_samples = len(samples)
+    while 1: # Loop forever so the generator never terminates
+        samples = sklearn.utils.shuffle(samples)
+        for offset in range(0, num_samples, batch_size):
+            batch_samples = samples[offset:offset+batch_size]
 
+            images = []
+            angles = []
+            for imagePath, measurement in batch_samples:
+                #originalImage = cv2.imread(imagePath)
+                #image = cv2.cvtColor(imagePath, cv2.COLOR_BGR2RGB)
+                images.append(imagePath)
+                angles.append(measurement)
+                # Flipping
+                images.append(cv2.flip(imagePath,1))
+                angles.append(measurement*-1.0)
+
+            # trim image to only see section with road
+            inputs = np.array(images)
+            outputs = np.array(angles)
+            yield sklearn.utils.shuffle(inputs, outputs)
+            
+            
 stored_lines = GetDataFromExcel(driving_data_path)
 
 total_images, steering_data = GetImagesAndSteeringData(stored_lines,images_path)
-x_train = np.array(total_images)
-y_train = np.array(steering_data)
 
-#total_images_augmented, steering_data_augmented = AugmentData(total_images, steering_data)
-#x_train = np.array(total_images_augmented)
-#y_train = np.array(steering_data_augmented)
+# Splitting samples and creating generators.
+samples = list(zip(total_images, steering_data))
+train_samples, validation_samples = train_test_split(samples, test_size=0.2)
+
+print('Train samples: {}'.format(len(train_samples)))
+print('Validation samples: {}'.format(len(validation_samples)))
+
+train_generator = generator(train_samples, batch_size=32)
+validation_generator = generator(validation_samples, batch_size=32)
 
 
 # set up lambda layer
 model = Sequential()
 model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
 model.add(Cropping2D(cropping=((50,20), (0,0))))
-
+# Nvidia Model
 model.add(Convolution2D(24,5,5, subsample=(2,2), activation='relu'))
 model.add(Convolution2D(36,5,5, subsample=(2,2), activation='relu'))
 model.add(Convolution2D(48,5,5, subsample=(2,2), activation='relu'))
@@ -87,22 +113,29 @@ model.add(Convolution2D(64,3,3, activation='relu'))
 model.add(Convolution2D(64,3,3, activation='relu'))
 model.add(Flatten())
 
-model.add(Dropout(p=0.5))
+model.add(Dropout(p=0.3))
 model.add(Activation('relu'))
 model.add(Dense(100))
 
-model.add(Dropout(p=0.5))
+model.add(Dropout(p=0.3))
 model.add(Activation('relu'))
 model.add(Dense(50))
 
-model.add(Dropout(p=0.5))
+model.add(Dropout(p=0.3))
 model.add(Activation('relu'))
 model.add(Dense(10))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-history_object = model.fit(x_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=7)
+print("Training the model")
+print()
+history_object = model.fit_generator(train_generator, samples_per_epoch= \
+                 len(train_samples), validation_data=validation_generator, \
+                 nb_val_samples=len(validation_samples), nb_epoch=7, verbose=1)
+
 model.save('model.h5')
+print("Model Saved")
+print()
 ### print the keys contained in the history object
 print(history_object.history.keys())
 
