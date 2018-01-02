@@ -59,6 +59,8 @@ My model consists of a convolution neural network with 3x3 filter sizes and dept
 
 The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
 
+![alt text][image1]
+
 #### 2. Attempts to reduce overfitting in the model
 
 The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
