@@ -65,6 +65,8 @@ Then I have tried Nvidia architecture and the vehicle driving has been improved 
 Finally I have modified Nvidia model and used it in training my model, For details about this version, see this [section](#2. Final Model Architecture) 
 
 
+![alt text][image1]
+
 #### 2. Attempts to reduce overfitting in the model
 
 The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
