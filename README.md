@@ -62,10 +62,7 @@ Then I have tried Nvidia architecture and the vehicle driving has been improved 
 ![alt text][image1]
 
 
-Finally I have modified Nvidia model and used it in training my model, For details about this version, see this [section](#2-Final-Model-Architecture) 
-
-
-![alt text][image1]
+Finally I have modified Nvidia model and used it in training my model, For details about this version, see this [section](README.md#2-Final-Model-Architecture) 
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -81,7 +78,7 @@ The model used an adam optimizer, so the learning rate was not tuned manually (m
 
 Training data was chosen to keep the vehicle driving on the road. I have used the training data provided by Udacity and made some preprocessing on them that help the model to train and drive autonomously in first track.
 
-For details about how I handled the training data, see this [section](#3. Creation of the Training Set & Training Process). --------------->
+For details about how I handled the training data, see this [section](README.md#3-Creation-of-the-Training-Set-&-Training-Process). --------------->
 
 
 ### Model Architecture and Training Strategy
@@ -108,26 +105,26 @@ The final model architecture (model.py lines 18-24) consisted of a convolution n
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][image1]
+![alt text][image10]
 
 #### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![alt text][image2]
+![alt text][image20]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![alt text][image30]
+![alt text][image40]
+![alt text][image50]
 
 Then I repeated this process on track two in order to get more data points.
 
 To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
 
-![alt text][image6]
-![alt text][image7]
+![alt text][image60]
+![alt text][image70]
 
 Etc ....
 
