@@ -5,7 +5,7 @@
 -------------------
 
 In this project we will use  deep neural networks and convolutional neural networks to clone driving behavior.
-
+[Section](model.py#L112:114)
 We will train a model which will be able to predict  a steering angle of an autonomous vehicle.
 
 After that we will use this model to drive the vehicle autonomously around a track in a simulator provided by Udacity team.
