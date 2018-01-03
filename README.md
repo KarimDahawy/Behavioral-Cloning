@@ -5,7 +5,7 @@
 -------------------
 
 In this project we will use  deep neural networks and convolutional neural networks to clone driving behavior.
-[Section](model.py#L112:114)
+
 We will train a model which will be able to predict  a steering angle of an autonomous vehicle.
 
 After that we will use this model to drive the vehicle autonomously around a track in a simulator provided by Udacity team.
@@ -65,19 +65,19 @@ Finally I have modified Nvidia model and used it in training my model, For detai
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model contains dropout layers in order to reduce overfitting.
+The model was trained and validated on different data sets by using 80% as training and 20% as validation to ensure that the model was not overfitting. 
+The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+1. **The** model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
 
 #### 4. Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I have used the training data provided by Udacity and made some preprocessing on them that help the model to train and drive autonomously in first track.
 
-For details about how I handled the training data, see this [section](README.md#3-Creation-of-the-Training-Set-&-Training-Process). --------------->
+For details about how I handled the training data, see this [section](#3-creation-of-the-training-set-&-training-process).
 
 
 ### Model Architecture and Training Strategy
