@@ -61,7 +61,7 @@ Then I have tried Nvidia architecture and the vehicle driving has been improved 
 ![alt text][image1]
 
 
-Finally I have modified Nvidia model and used it in training my model, For details about this version, see this [section](#2-final-model-architecture) 
+Finally I have modified Nvidia model and used it in training my model, For details about this version, Check [Final Model Architecture](#2-final-model-architecture) 
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -71,7 +71,9 @@ The model was tested by running it through the simulator and ensuring that the v
 
 #### 3. Model parameter tuning
 
-1. **The** model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+* The model used an adam optimizer, so the learning rate was not tuned manually ([model.py line 135](model.py#L135)).
+* Number of epochs is **7**. ([model.py line 142](model.py#L142)).
+* Number of batches is **32**. ([model.py line 107, line 108](model.py#L107-L108)).
 
 #### 4. Appropriate training data
 
