@@ -117,22 +117,28 @@ The final model architecture can be found in ([model.py line 117 to line 132](mo
 
 To capture good driving behavior, I have used the training data provided by Udacity and made some preprocessing on them in order to fit my model.
 
-The training data contains center,left and right images for the same scene. I didn't depend on one of them, but I have combined all the three type of images in order to have a good driving behavior.
+The training data contains center,left and right images for the same scene. I didn't depend on one of them, but I have **combined** all the three type of images in order to have a good driving behavior.
 
-I have add a correction in the steering data with +0.2 for left images and -0.2 for right images.
+I have add a correction in the steering data with **+0.2** for left images and **-0.2** for right images.
+
+Here's an example of how the scene looks like from 3 different angles:
+
+**Right**
 
 ![alt text][image3]
+
+**Center**
+
 ![alt text][image4]
+
+**Left**
+
 ![alt text][image5]
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+To augment the data set, I also flipped images and angles to add more data.	`
 
-
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
+After the collection process, I preprocessed this data by normalization the images to zero mean and cropping the images to have only the interesting part in the image that will benefit my training.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 7. I used an adam optimizer so that manually training the learning rate wasn't necessary.
-
