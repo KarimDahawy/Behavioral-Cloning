@@ -25,7 +25,6 @@ After that we will use this model to drive the vehicle autonomously around a tra
 
 [image1]: ./examples/1.nvidia_model.jpg
 [image2]: ./examples/2.modified_nvidia_model.jpg
-[image3]: ./examples/3.model_mean_squared_error_loss.jpeg
 
 ### Files Submitted & Code Quality
 ---------------------------------------------------
@@ -61,7 +60,7 @@ Then I have tried Nvidia architecture and the vehicle driving has been improved 
 
 ![alt text][image1]
 
-[link](#Overview)
+
 Finally I have modified Nvidia model and used it in training my model, For details about this version, see this [section](#2-final-model-architecture) 
 
 #### 2. Attempts to reduce overfitting in the model
