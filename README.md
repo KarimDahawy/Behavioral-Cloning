@@ -25,6 +25,9 @@ After that we will use this model to drive the vehicle autonomously around a tra
 
 [image1]: ./examples/1.nvidia_model.jpg
 [image2]: ./examples/2.modified_nvidia_model.jpg
+[image3]: ./examples/3.right_2016_12_01_13_45_56_283.jpg
+[image4]: ./examples/4.center_2016_12_01_13_45_56_283.jpg
+[image5]: ./examples/5.left_2016_12_01_13_45_56_283.jpg
 
 ### Files Submitted & Code Quality
 ---------------------------------------------------
@@ -79,36 +82,38 @@ The model was tested by running it through the simulator and ensuring that the v
 
 Training data was chosen to keep the vehicle driving on the road. I have used the training data provided by Udacity and made some preprocessing on them that help the model to train and drive autonomously in first track.
 
-For details about how I handled the training data, check [Creation of the Training Set](#3-creation-of-the-training-set-and-training-process)
+For details about how I handled the training data, see this [Creation of the Training Set & Training Process](#3-creation-of-the-training-set-&-training-process).
 
 
 ### Model Architecture and Training Strategy
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was to train a model which will be able to make the vehicle drive autonomously without leaving the track
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+My first step was to use LeNet architecture with 3 epochs to train the model, but the vehicle went directly off the track.
+
+My second step was to use Nvidia architecture, I thought this model might be appropriate because Nvidia solved the same problem in its end to end autonomous project.
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I modified the model so that ...
+To combat the overfitting, I modified Nvidia architecture by adding dropout layers which helped a lot especially while driving on the bridge and in the curves as well.
 
-Then I ... 
+Then I have preprocessed, augmented and shuffled the images in order to fit the data for my model.
 
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track, but after adding dropout layers the vehicle was able to drive smoothly around track one.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture can be found in ([model.py line 117 to line 132](model.py#L117-L132)).
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+**Here's how the model looks like.**
 
-![alt text][image10]
+![alt text][image2]
 
-#### 3. Creation of the Training Set and Training Process
+#### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
