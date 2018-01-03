@@ -30,40 +30,40 @@ def GetImagesAndSteeringData(StoredLines,ImagesPath):
     print("Getting Camera Data....")
     for line in StoredLines:
         
-		#####################Center Camera Data#######################
-		# Get center Image.
-		center_image_name = line[0]
+        #####################Center Camera Data#######################
+        # Get center Image.
+        center_image_name = line[0]
         center_image_path = ImagesPath + center_image_name
         center_image = cv2.imread(center_image_path)
-		# Get center image steer angle.
+        # Get center image steer angle.
         center_steering_value = float(line[3])
-		# Add center image to images array.
+        # Add center image to images array.
         images.append(center_image)
         # Add steer angle of center image to steering array.
-		steering.append(center_steering_value)
+        steering.append(center_steering_value)
         
         #####################Left Camera Data#######################
         # Get left Image.
-		left_image_name = line[1].strip()
+        left_image_name = line[1].strip()
         left_image_path = ImagesPath + left_image_name
         left_image = cv2.imread(left_image_path)
-		# Get left image steer angle and modify it with the correction value.
+        # Get left image steer angle and modify it with the correction value.
         left_steering_value = center_steering_value + correction
         # Add left image to images array.
-		images.append(left_image)
-		# Add steer angle of left image to steering array.
+        images.append(left_image)
+        # Add steer angle of left image to steering array.
         steering.append(left_steering_value)
         
         #####################Right Camera Data#######################
         # Get right Image.
-		right_image_name = line[2].strip()
+        right_image_name = line[2].strip()
         right_image_path = ImagesPath + right_image_name
         right_image = cv2.imread(right_image_path)
-		# Get right image steer angle and modify it with the correction value.
+        # Get right image steer angle and modify it with the correction value.
         right_steering_value = center_steering_value - correction
-		# Add right image to images array.
+        # Add right image to images array.
         images.append(right_image)
-		# Add steer angle of right image to steering array.
+        # Add steer angle of right image to steering array.
         steering.append(right_steering_value)
         
     print ("Camera Data Captured")
@@ -141,7 +141,7 @@ history_object = model.fit_generator(train_generator, samples_per_epoch= \
                  len(train_samples), validation_data=validation_generator, \
                  nb_val_samples=len(validation_samples), nb_epoch=7, verbose=1)
 
-# Save model				 
+# Save model                 
 model.save('model.h5')
 print("Model Saved")
 print()
