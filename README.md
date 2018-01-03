@@ -79,7 +79,7 @@ The model was tested by running it through the simulator and ensuring that the v
 
 Training data was chosen to keep the vehicle driving on the road. I have used the training data provided by Udacity and made some preprocessing on them that help the model to train and drive autonomously in first track.
 
-For details about how I handled the training data, check [Creation of the Training Set](#3-creation-of-the-training-set-&-training-process)
+For details about how I handled the training data, check [Creation of the Training Set](#3-creation-of-the-training-set-and-training-process)
 
 
 ### Model Architecture and Training Strategy
@@ -108,7 +108,7 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 ![alt text][image10]
 
-#### 3. Creation of the Training Set & Training Process
+#### 3. Creation of the Training Set and Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
