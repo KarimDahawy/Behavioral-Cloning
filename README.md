@@ -86,7 +86,7 @@ For details about how I handled the training data, see this [Creation of the Tra
 
 
 ### Model Architecture and Training Strategy
-
+------------------------------------------------------------------
 #### 1. Solution Design Approach
 
 The overall strategy for deriving a model architecture was to train a model which will be able to make the vehicle drive autonomously without leaving the track
@@ -115,29 +115,24 @@ The final model architecture can be found in ([model.py line 117 to line 132](mo
 
 #### 3. Creation of the Training Set and Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I have used the training data provided by Udacity and made some preprocessing on them in order to fit my model.
 
-![alt text][image20]
+The training data contains center,left and right images for the same scene. I didn't depend on one of them, but I have combined all the three type of images in order to have a good driving behavior.
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+I have add a correction in the steering data with +0.2 for left images and -0.2 for right images.
 
-![alt text][image30]
-![alt text][image40]
-![alt text][image50]
-
-Then I repeated this process on track two in order to get more data points.
+![alt text][image3]
+![alt text][image4]
+![alt text][image5]
 
 To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
 
-![alt text][image60]
-![alt text][image70]
 
-Etc ....
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 7. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
