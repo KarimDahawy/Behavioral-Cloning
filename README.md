@@ -79,7 +79,7 @@ The model was tested by running it through the simulator and ensuring that the v
 
 Training data was chosen to keep the vehicle driving on the road. I have used the training data provided by Udacity and made some preprocessing on them that help the model to train and drive autonomously in first track.
 
-For details about how I handled the training data, see this [section](#3-creation-of-the-training-set-&-training-process).
+For details about how I handled the training data, check [Creation of the Training Set](#3-creation-of-the-training-set-&-training-process)
 
 
 ### Model Architecture and Training Strategy
